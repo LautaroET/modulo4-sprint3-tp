@@ -1,30 +1,31 @@
 import React, { useContext } from "react";
 import { CarritoContext } from "../context/CarritoContext";
 
-function CarritoModal({ onClose }) {
+// Modal que muestra los productos en el carrito.
+function WatchlistModal({ onClose }) { // Cambié CarritoModal a WatchlistModal
   const {
-    carrito,
-    eliminarDelCarrito,
-    actualizarCantidad,
-    vaciarCarrito,
-    precioTotal,
+    carrito, // Mantuve 'carrito' ya que es el nombre en CarritoContext
+    eliminarDelCarrito, // Mantuve 'eliminarDelCarrito'
+    actualizarCantidad, // Mantuve 'actualizarCantidad'
+    vaciarCarrito, // Mantuve 'vaciarCarrito'
+    precioTotal, // Mantuve 'precioTotal'
   } = useContext(CarritoContext);
 
   return (
     <div className="fixed inset-0 bg-black/75 flex justify-center items-center z-50">
       <div className="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md mx-4 max-h-[80vh] overflow-y-auto dark:bg-gray-700">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-3xl font-bold text-blue-400">Mi Carrito</h2>
+          <h2 className="text-3xl font-bold text-blue-400">Mi Carrito</h2> {/* Mantuve "Mi Carrito" */}
           <button onClick={onClose} className="text-gray-400 hover:text-white text-2xl font-bold">
             ×
           </button>
         </div>
 
         {carrito.length === 0 ? (
-          <p className="text-gray-300">El carrito está vacío.</p>
+          <p className="text-gray-300">El carrito está vacío.</p> // Mantuve "El carrito está vacío."
         ) : (
           <ul className="space-y-4">
-            {carrito.map((item) => (
+            {carrito.map((item) => ( // Mantuve 'item' para los elementos del carrito
               <li key={item.id} className="flex justify-between bg-gray-700 p-3 rounded-md dark:bg-gray-600">
                 <span className="text-white">{item.name}</span>
                 <div className="flex items-center gap-2">
@@ -52,7 +53,7 @@ function CarritoModal({ onClose }) {
   );
 }
 
-export default CarritoModal;
+export default WatchlistModal;
 
 
 

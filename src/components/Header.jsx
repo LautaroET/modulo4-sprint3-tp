@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { TemaContext } from "../context/TemaContext";
 
+// Encabezado de la aplicación con logo, botón de carrito y alternador de tema.
 function Header({ onToggleCarrito }) {
   const { temaOscuro, alternarTema } = useContext(TemaContext);
 
@@ -8,8 +9,8 @@ function Header({ onToggleCarrito }) {
     <header className="w-full bg-blue-950 shadow-lg p-4 flex justify-between items-center dark:bg-gray-800">
       <div className="flex items-center gap-3">
         <img
-          src={"/img/palomitas-de-maiz.png"}
-          alt="Logo de Watchlist"
+          src={"/img/palomitas-de-maiz.png"} // Mantengo la ruta original.
+          alt="Logo de Watchlist" // Mantengo el alt original.
           className="w-16 h-16 object-contain"
         />
         <h1 className="text-white text-2xl font-extrabold tracking-wide">
@@ -17,6 +18,7 @@ function Header({ onToggleCarrito }) {
         </h1>
       </div>
       <div className="flex items-center gap-4">
+        {/* Botón para alternar el tema */}
         <button
           onClick={alternarTema}
           className="text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-300"
@@ -28,6 +30,7 @@ function Header({ onToggleCarrito }) {
           )}
         </button>
 
+        {/* Botón para abrir/cerrar el carrito */}
         <button
           onClick={onToggleCarrito}
           className="text-white p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-sky-300 flex items-center"

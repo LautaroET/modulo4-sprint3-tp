@@ -1,61 +1,28 @@
-// components/CarritoModal.js
-import React, { useContext } from "react";
-import { CarritoContext } from "../context/CarritoContext";
+import React from "react";
 
-function CarritoModal({ onClose }) {
-  const { carrito, removeFromCart, updateQuantity, totalPrice, clearCart } =
-    useContext(CarritoContext);
-
+/**
+ * Componente Footer que muestra información de derechos de autor y detalles del proyecto.
+ * Utiliza Tailwind CSS para los estilos.
+ */
+function Footer() {
   return (
-    <div className="fixed inset-0 bg-black/75 flex justify-center items-center z-50">
-      <div className="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md mx-4 max-h-[80vh] overflow-y-auto dark:bg-gray-700"> {/* Clases dark: */}
-        <div className="flex justify-between items-center mb-4">
-          <h2 className="text-3xl font-bold text-blue-400">Mi Carrito</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-white text-2xl font-bold">
-            ×
-          </button>
-        </div>
-
-        {carrito.length === 0 ? (
-          <p className="text-gray-300">El carrito está vacío.</p>
-        ) : (
-          <ul className="space-y-4">
-            {carrito.map((item) => (
-              <li
-                key={item.id}
-                className="flex items-center justify-between bg-gray-700 p-3 rounded-md dark:bg-gray-600" 
-              >
-                <span className="text-white">{item.name}</span>
-                <div className="flex gap-2 items-center">
-                  <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="bg-gray-600 px-2 rounded dark:bg-gray-500">
-                    -
-                  </button>
-                  <span className="text-white">{item.quantity}</span>
-                  <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="bg-gray-600 px-2 rounded dark:bg-gray-500">
-                    +
-                  </button>
-                  <span className="ml-4 text-white">${item.price * item.quantity}</span>
-                  <button onClick={() => removeFromCart(item.id)} className="text-red-400 ml-4">
-                    Eliminar
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div className="mt-4 text-right">
-          <p className="text-lg font-bold text-white">Total: ${totalPrice}</p>
-          {carrito.length > 0 && (
-            <button onClick={clearCart} className="mt-2 bg-red-700 px-4 py-2 rounded dark:bg-red-600">
-              Vaciar carrito
-            </button>
-          )}
-        </div>
+    // Elemento footer con un fondo azul oscuro, contenido centrado y padding vertical.
+    <footer className="bg-blue-950 flex justify-center py-4">
+      {/* Contenedor para el contenido del footer, con márgenes horizontales automáticos para centrar y padding horizontal. */}
+      <div className="container mx-auto px-4 text-center">
+        {/* Texto de derechos de autor con tamaño de fuente responsivo, peso medio y espaciado de letras amplio. */}
+        <p className="text-lg md:text-xl font-medium tracking-wide">
+          &copy; <span className="text-sky-300">Tienda de Películas</span> - Desarrollado por{" "} {/* Cambié Watcht List a Tienda de Películas */}
+          <span className="text-sky-300">Lautaro Tapia</span> - 2025
+        </p>
+        {/* Texto de detalles del proyecto con un tamaño de fuente más pequeño, margen superior y color gris. */}
+        <p className="text-sm mt-1 text-gray-400">
+          Módulo 4 - Sprint 2 Trabajo Práctico
+        </p>
       </div>
-    </div>
+    </footer>
   );
 }
 
-export default CarritoModal;
+export default Footer;
 
