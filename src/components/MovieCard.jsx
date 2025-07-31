@@ -1,22 +1,34 @@
 import React, { useContext } from "react";
 import { CarritoContext } from "../context/CarritoContext";
 
-// Componente individual que representa una tarjeta de película/producto.
-function MovieCard({ movie }) { // Cambié 'producto' a 'movie' para seguir la nomenclatura del ejemplo.
+function MovieCard({ movie }) {
   const { agregarAlCarrito } = useContext(CarritoContext);
 
   return (
-    <div className="bg-gray-800 p-4 rounded-xl text-white text-center dark:bg-gray-700">
-      <img
-        src={movie.imagen}
-        alt={movie.name}
-        className="w-full h-40 object-cover rounded"
-      />
-      <h3 className="mt-2 text-lg font-bold">{movie.name}</h3>
-      <p className="text-sky-400">${movie.price}</p>
+    <div className="
+      bg-white p-4 rounded-xl text-gray-800 text-center
+      shadow-md hover:shadow-lg transform hover:scale-105 transition-all duration-300
+      dark:bg-gray-800 dark:text-gray-100 dark:shadow-xl dark:hover:shadow-2xl
+      flex flex-col // Añadido para mejor control del layout interno
+    ">
+      {/* Contenedor de la imagen para asegurar que se muestre bien */}
+      <div className="w-full h-60 md:h-72 lg:h-80 overflow-hidden rounded-md mb-4 flex items-center justify-center"> {/* Aumentamos la altura */}
+        <img
+          src={movie.imagen}
+          alt={`Portada de ${movie.name}`} // Mejoramos el alt text
+          className="w-full h-full object-cover object-center transform hover:scale-110 transition-transform duration-500 rounded-md" // Clave para la imagen
+        />
+      </div>
+
+      <h3 className="text-2xl font-bold text-indigo-700 dark:text-blue-400 mb-2 truncate">{movie.name}</h3> {/* Aumentamos tamaño y añadimos truncate */}
+      <p className="text-3xl font-extrabold text-lime-600 dark:text-emerald-400 mb-4">${movie.price}</p> {/* Aumentamos tamaño */}
+
       <button
-        onClick={() => agregarAlCarrito(movie)} // Usamos 'movie' aquí.
-        className="mt-2 bg-blue-700 px-4 py-2 rounded hover:bg-blue-500 transition cursor-pointer dark:bg-blue-600 dark:hover:bg-blue-400"
+        onClick={() => agregarAlCarrito(movie)}
+        className="mt-auto w-full py-3 bg-green-600 text-white font-semibold rounded-lg
+                  hover:bg-green-700 transition-colors duration-300
+                  dark:bg-emerald-700 dark:hover:bg-emerald-600
+                   shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50" // Efectos adicionales para el botón
       >
         Agregar al carrito
       </button>

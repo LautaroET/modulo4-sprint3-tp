@@ -19,18 +19,16 @@ function App() {
   return (
     <TemaProvider>
       <CarritoProvider>
-        <div className="min-h-screen bg-white text-black transition dark:bg-gray-900 dark:text-white">
-          {/* Encabezado con botón para abrir/cerrar el modal del carrito y alternar tema */}
+        {/* Ajustamos el degradado del fondo para el modo claro */}
+        <div className="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-200 text-gray-800 transition-colors duration-700
+                        dark:from-gray-950 dark:to-blue-950 dark:text-gray-100">
           <Header onToggleCarrito={toggleModal} />
           <main>
-            {/* Lista de productos disponibles para agregar al carrito */}
             <MovieList />
           </main>
-          {/* Modal del carrito visible si isModalOpen es true */}
           {isModalOpen && (
             <WatchlistModal onClose={toggleModal} />
           )}
-          {/* Pie de página */}
           <Footer />
         </div>
       </CarritoProvider>
