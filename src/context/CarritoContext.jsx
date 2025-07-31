@@ -2,7 +2,7 @@ import { createContext, useState, useEffect } from "react";
 
 export const CarritoContext = createContext();
 
-export const CarritoProvider = ({ children }) => {
+const CarritoProvider = ({ children }) => {
   const [carrito, setCarrito] = useState(() => {
     return JSON.parse(localStorage.getItem("carrito")) || [];
   });
@@ -11,22 +11,26 @@ export const CarritoProvider = ({ children }) => {
     localStorage.setItem("carrito", JSON.stringify(carrito));
   }, [carrito]);
 
-  const addToCart = (producto) => {
+  const agregarAlCarrito = (producto) => {
     setCarrito((prev) => {
-      const existe = prev.find((item) => item.id === producto.id);
-      if (existe) {
+      const existente = prev.find((item) => item.id === producto.id);
+      if (existente) {
         return prev.map((item) =>
-          item.id === producto.id ? { ...item, quantity: item.quantity + 1 } : item
+          item.id === producto.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
         );
+      } else {
+        return [...prev, { ...producto, quantity: 1 }];
       }
-      return [...prev, { ...producto, quantity: 1 }];
     });
   };
 
-  const removeFromCart = (id) =>
+  const eliminarDelCarrito = (id) => {
     setCarrito((prev) => prev.filter((item) => item.id !== id));
+  };
 
-  const updateQuantity = (id, cantidad) => {
+  const actualizarCantidad = (id, cantidad) => {
     setCarrito((prev) =>
       prev.map((item) =>
         item.id === id ? { ...item, quantity: Math.max(1, cantidad) } : item
@@ -34,24 +38,32 @@ export const CarritoProvider = ({ children }) => {
     );
   };
 
-  const clearCart = () => setCarrito([]);
+  const vaciarCarrito = () => setCarrito([]);
 
-  const totalPrice = carrito.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const precioTotal = carrito.reduce(
+    (total, item) => total + item.price * item.quantity,
+    0
+  );
 
   return (
     <CarritoContext.Provider
       value={{
         carrito,
-        addToCart,
-        removeFromCart,
-        updateQuantity,
-        clearCart,
-        totalPrice,
+        agregarAlCarrito,
+        eliminarDelCarrito,
+        actualizarCantidad,
+        vaciarCarrito,
+        precioTotal,
       }}
     >
       {children}
     </CarritoContext.Provider>
   );
 };
+
+export default CarritoProvider;
+
+
+
 
 

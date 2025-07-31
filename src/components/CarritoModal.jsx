@@ -2,12 +2,17 @@ import React, { useContext } from "react";
 import { CarritoContext } from "../context/CarritoContext";
 
 function CarritoModal({ onClose }) {
-  const { carrito, removeFromCart, updateQuantity, totalPrice, clearCart } =
-    useContext(CarritoContext);
+  const {
+    carrito,
+    eliminarDelCarrito,
+    actualizarCantidad,
+    vaciarCarrito,
+    precioTotal,
+  } = useContext(CarritoContext);
 
   return (
     <div className="fixed inset-0 bg-black/75 flex justify-center items-center z-50">
-      <div className="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md mx-4 max-h-[80vh] overflow-y-auto">
+      <div className="bg-gray-800 rounded-lg shadow-xl p-6 w-full max-w-md mx-4 max-h-[80vh] overflow-y-auto dark:bg-gray-700">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-3xl font-bold text-blue-400">Mi Carrito</h2>
           <button onClick={onClose} className="text-gray-400 hover:text-white text-2xl font-bold">
@@ -20,23 +25,14 @@ function CarritoModal({ onClose }) {
         ) : (
           <ul className="space-y-4">
             {carrito.map((item) => (
-              <li
-                key={item.id}
-                className="flex items-center justify-between bg-gray-700 p-3 rounded-md"
-              >
+              <li key={item.id} className="flex justify-between bg-gray-700 p-3 rounded-md dark:bg-gray-600">
                 <span className="text-white">{item.name}</span>
-                <div className="flex gap-2 items-center">
-                  <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="bg-gray-600 px-2 rounded">
-                    -
-                  </button>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => actualizarCantidad(item.id, item.quantity - 1)} className="bg-gray-600 px-2 rounded">-</button>
                   <span className="text-white">{item.quantity}</span>
-                  <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="bg-gray-600 px-2 rounded">
-                    +
-                  </button>
+                  <button onClick={() => actualizarCantidad(item.id, item.quantity + 1)} className="bg-gray-600 px-2 rounded">+</button>
                   <span className="ml-4 text-white">${item.price * item.quantity}</span>
-                  <button onClick={() => removeFromCart(item.id)} className="text-red-400 ml-4">
-                    Eliminar
-                  </button>
+                  <button onClick={() => eliminarDelCarrito(item.id)} className="text-red-400 ml-4">Eliminar</button>
                 </div>
               </li>
             ))}
@@ -44,9 +40,9 @@ function CarritoModal({ onClose }) {
         )}
 
         <div className="mt-4 text-right">
-          <p className="text-lg font-bold text-white">Total: ${totalPrice}</p>
+          <p className="text-lg font-bold text-white">Total: ${precioTotal}</p>
           {carrito.length > 0 && (
-            <button onClick={clearCart} className="mt-2 bg-red-700 px-4 py-2 rounded">
+            <button onClick={vaciarCarrito} className="mt-2 bg-red-700 px-4 py-2 rounded dark:bg-red-600">
               Vaciar carrito
             </button>
           )}
@@ -57,5 +53,7 @@ function CarritoModal({ onClose }) {
 }
 
 export default CarritoModal;
+
+
 
 

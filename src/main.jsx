@@ -1,3 +1,4 @@
+import React from "react";
 // Importa `StrictMode` de React para habilitar comprobaciones adicionales y advertencias en el modo de desarrollo.
 import { StrictMode } from 'react'
 // Importa `createRoot` de 'react-dom/client' para inicializar la aplicación React.
